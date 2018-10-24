@@ -1,0 +1,30 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "toughChow"
+  - git config user.email "toughChow@gmail.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://github.com/toughChow/toughChow.github.io.git" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - blog-resource
+env:
+ global:
+   - GH_REF: github.com/toughChow/toughChow.github.io.git
