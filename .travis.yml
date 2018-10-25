@@ -10,16 +10,20 @@ install:
  # - npm install -g gulp
 
 script:
-  - hexo g
+  - hexo clean
+  - hexo generate
 
 after_script:
-  - cd ./public
-  - git init
+#  - cd ./public
+#  - git init
   - git config user.name "toughChow"
-  - git config user.email "toughChow@gmail.com"
-  - git add .
-  - git commit -m "Update docs"
-  - git push --force --quiet "https://github.com/toughChow/toughChow.github.io.git" master:master
+#  - git config user.email "toughChow@gmail.com"
+  - sed -i "s/gh_token/c9035f33ff1cf855133720ae8d1980b754aa8e96/g" ./_config.yml
+  - sed -i'' "s~https://github.com/toughChow/toughChow.github.io.git~https://Travis-Hexo@github.com/toughChow/toughChow.github.io.git~" _config.yml
+#  - git add .
+#  - git commit -m "Update docs"
+#  - git push --force --quiet "https://github.com/toughChow/toughChow.github.io.git" master:master
+  - hexo deploy
 # E: Build LifeCycle
 
 branches:
