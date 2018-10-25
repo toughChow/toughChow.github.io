@@ -24,7 +24,7 @@ after_script:
 
 branches:
   only:
-    - blog-resource
+    - hexo
 env:
  global:
    - GH_REF: github.com/toughChow/toughChow.github.io.git
