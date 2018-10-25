@@ -1,11 +1,14 @@
 language: node_js
+
 node_js: stable
 
 before_install:
-  - git config --global user.name "toughChow"
-  - git config --global user.email "toughChow@gmail.com"
+#  - git config --global user.name "toughChow"
+#  - git config --global user.email "toughChow@gmail.com"
+  - export TZ='Asia/Shanghai'
   - npm install -g hexo-cli
-
+  - chmod +x ./publish-to-gh-pages.sh
+  
 # S: Build Lifecycle
 install:
   - npm install
@@ -16,18 +19,21 @@ install:
 
 script:
   - hexo clean
-  - hexo generate
+  - hexo g
 
-after_success:
-  - cd ./public
-  - git init
+#after_success:
+#  - cd ./public
+#  - git init
 #  - sed -i "s/gh_token/c9035f33ff1cf855133720ae8d1980b754aa8e96/g" ./_config.yml
 #  - sed -i'' "s~https://github.com/toughChow/toughChow.github.io.git~https://Travis-Hexo@github.com/toughChow/toughChow.github.io.git~" _config.yml
-  - git add .
-  - git commit -m "Update docs"
-  - git push --force --quiet "https://$REPO_TOKEN@github.com/toughChow/toughChow.github.io.git" master:master
+#  - git add .
+#  - git commit -m "Update docs"
+#  - git push --force --quiet "https://$REPO_TOKEN@github.com/toughChow/toughChow.github.io.git" master:master
 #  - hexo deploy
 # E: Build LifeCycle
+
+after_script:
+    - ./publish-to-gh-pages.sh
 
 branches:
   only:
