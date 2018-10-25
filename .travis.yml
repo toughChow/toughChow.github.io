@@ -25,7 +25,7 @@ after_success:
 #  - sed -i'' "s~https://github.com/toughChow/toughChow.github.io.git~https://Travis-Hexo@github.com/toughChow/toughChow.github.io.git~" _config.yml
   - git add .
   - git commit -m "Update docs"
-  - git push --force --quiet "https://$Travis-Hexo@github.com/toughChow/toughChow.github.io.git" master:master
+  - git push --force --quiet "https://$GH@github.com/toughChow/toughChow.github.io.git" master:master
 #  - hexo deploy
 # E: Build LifeCycle
 
