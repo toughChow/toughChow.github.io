@@ -1,3 +1,8 @@
+---
+title: Mybatis:Invalid bound statement (not found)
+tags: hexo
+categories: 建站
+---
 # mybatis-- Invalid bound statement (not found)
 
 ## 异常描述
