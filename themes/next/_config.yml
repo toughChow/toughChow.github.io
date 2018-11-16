@@ -357,9 +357,9 @@ han: false
 #swiftype_key:
 
 # Baidu Analytics ID
-baidu_analytics:594d6695d35ac3489067c0087b2a7e01
+baidu_analytics: 594d6695d35ac3489067c0087b2a7e01
 
-# Duoshuo ShortName
+#Duoshuo ShortName
 #duoshuo_shortname:
 
 # Disqus
@@ -599,6 +599,12 @@ calendar:
   showDeleted: false
   singleEvents: true
   maxResults: 250
+  
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000  
 
 # Algolia Search
 algolia_search:
@@ -613,7 +619,7 @@ algolia_search:
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
