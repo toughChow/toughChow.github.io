@@ -8,7 +8,6 @@ categories: BuildTools
 ​	在gradle目录下的init.d目录下创建init.gradle文件
 
 ```yml
-
 allprojects{
     repositories {
         def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
