@@ -382,7 +382,7 @@ changyan:
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
 valine:
-  enable: true
+  enable: false
   appid:  jKI7u3GrmFMUnGdkexpDGjez-gzGzoHsz
   appkey:  rvgiGSSFhSOrTCqjfa0W9Czm
 # mail notifier , https://github.com/xCss/Valine/wiki
@@ -400,7 +400,7 @@ valine:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+livere_uid: dd4b7e828adde3373ba2ea97
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
