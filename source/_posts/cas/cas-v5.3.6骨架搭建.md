@@ -1,6 +1,6 @@
 ---
 title: cas-v5.3.6骨架搭建
-type: cas
+types: cas
 categories: cas
 ---
 

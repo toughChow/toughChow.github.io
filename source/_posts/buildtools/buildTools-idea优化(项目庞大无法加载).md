@@ -1,7 +1,7 @@
 ---
 
 title: gradle项目过于庞大无法加载完成
-tags: gradle,idea
+tags: idea
 categories: BuildTools
 
 ---

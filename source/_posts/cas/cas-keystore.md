@@ -1,6 +1,6 @@
 ---
 title: cas-server中KeyStore配置
-tag: keytool
+tags: keytool
 categories: cas
 ---
 

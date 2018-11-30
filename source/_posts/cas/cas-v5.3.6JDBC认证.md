@@ -1,6 +1,6 @@
 ---
 title: cas-v5.3.6JDBC认证
-type: cas
+types: cas
 categories: cas
 ---
 
