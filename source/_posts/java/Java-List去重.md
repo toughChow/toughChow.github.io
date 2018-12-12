@@ -77,3 +77,16 @@ contents.forEach(content -> {
 ```
 
 ​	但是其中content中也存在重复对象，感觉解决起来特别麻烦。若有大神知道怎么用Lambda解决，还望多多指点。
+
+------
+
+# List多字段去重
+
+​	根据`devId`和`cmd`去重，如下：
+
+```java
+List<SmartLightDispatcherPO> distinctList = lists.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getDevId() + ";" + o.getCmd()))), ArrayList::new
+        ));
+```
+
