@@ -2,6 +2,7 @@
 title: Java面试题小记
 tags: 面试题
 categories: Java
+date: 2018/12/12
 ---
 
 1. `short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？`

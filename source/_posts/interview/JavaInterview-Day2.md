@@ -2,6 +2,7 @@
 title: Java面试题小记2
 tags: 面试题
 categories: Java
+date: 2018/12/29
 ---
 
 1.`抽象的（abstract）方法是否可同时是静态的（static）,是否可同时是本地方法（native），是否可同时被synchronized修饰？`
