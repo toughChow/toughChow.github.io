@@ -2,6 +2,7 @@
 title: cas-v5.3.6JDBC认证
 types: cas
 categories: cas
+date: 2018/11/30
 ---
 
 # 创建数据库

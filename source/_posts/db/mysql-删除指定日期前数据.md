@@ -2,6 +2,7 @@
 title: mysql删除指定日期前数据
 tags: mysql
 categories: db
+date: 2018/11/29
 ---
 
 # 需求

@@ -1,7 +1,8 @@
 ---
 title: Mybatis:Invalid bound statement (not found)
-tags: hexo
-categories: 建站
+tags: mybatis
+categories: db
+date: 2018/11/17
 ---
 # mybatis-- Invalid bound statement (not found)
 

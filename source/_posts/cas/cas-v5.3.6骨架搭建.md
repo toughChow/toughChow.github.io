@@ -2,6 +2,7 @@
 title: cas-v5.3.6骨架搭建
 types: cas
 categories: cas
+date: 2018/11/30
 ---
 
 ​	由于公司使用JDK版本为1.8，而cas 6.x需要JDK 11，因此在cas 5.3.x的基础上搭建cas。

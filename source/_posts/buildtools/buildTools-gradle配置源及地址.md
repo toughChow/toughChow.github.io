@@ -2,6 +2,7 @@
 title: gradle配置源及地址
 tags: gradle
 categories: BuildTools
+date: 2018/11/17
 ---
 # 配置阿里云仓库
 

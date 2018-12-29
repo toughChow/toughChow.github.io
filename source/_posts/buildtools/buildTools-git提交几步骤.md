@@ -2,6 +2,7 @@
 title: git提交步骤
 tags: git
 categories: BuildTools
+date: 2018/12/29
 ---
 
 # Part 1 提交未授权问题
