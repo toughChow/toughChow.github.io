@@ -30,7 +30,7 @@ String num = Integer.parseInt("fafa", 16); //64250
 
 ​	若十进制数为负数，转换将出现问题。
 
-如`Integer.toHexString(-6)`讲输出fffffa，此时若进行十六进制转十进制将报`NumberFormatException`，因此此处在转为`Hex`的时候需做如下操作
+如`Integer.toHexString(-6)`将输出`fffffa`，此时若进行十六进制转十进制将报`NumberFormatException`，因此此处在转为`Hex`的时候需做如下操作
 
 ```
 Integer.toHexString(-6 & 0xff);
