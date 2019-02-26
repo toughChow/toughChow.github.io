@@ -1,5 +1,5 @@
 ---
-title: 老胡教你学vue
+title: 老胡教我学vue
 tags: vue
 categories: front-end
 date: 2019/01/31
