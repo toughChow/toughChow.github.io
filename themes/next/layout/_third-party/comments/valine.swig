@@ -19,5 +19,14 @@
         guest_info:guest,
         pageSize:'{{ theme.valine.pageSize }}' || 10,
     });
+	
+	//新增以下代码即可，可以移除.info下所有子节点。
+	var infoEle = document.querySelector('#comments .info');
+	if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+	  infoEle.childNodes.forEach(function(item) {
+		item.parentNode.removeChild(item);
+	  });
+	}
+	
   </script>
 {% endif %}
