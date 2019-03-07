@@ -15,6 +15,22 @@ docker build
 
 ## 运行docker容器
 
+### `docker run [OPTIONS] IMAGE[:TAG/][COMMAND][ARG...]`
+
+决定容器的运行方式，前台执行还是后台执行
+
+docker run后面追加-d=true或者-d，那么容器将会执行在后台模式。
+
+docker exec来进入到该容器中，或者attach重新连接容器的会话
+
+进行交互式操作（如shell），那我们必须使用-i -t参数同容器进行数据交互
+
+docker run时没有执行--name，那么deamon会自动生成一个随机字符串UUID
+
+Docker时有自动化的需求，你可以将containerID输出到指定的文件中（PIDfile）： --cidfile=""
+
+Docker的容器是没有特权的，例如不能在容器中再启动一个容器。这是因为默认情况下容器是不能访问任何其它设备的。但是通过"privileged"，容器就拥有了访问任何其它设备的权限。23：34
+
 ```dockerfile
 docker run ubuntu echo hello docker
 ```
