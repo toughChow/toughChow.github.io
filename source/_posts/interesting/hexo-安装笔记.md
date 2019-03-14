@@ -93,6 +93,23 @@ date: 2018/11/27
 
 ​	这样，复制功能就ok惹。
 
-## 评论系统-Gitmen
+# 背景图
 
-​	
+​	在source/css/_custom.styl中添加
+
+```
+@media screen and (min-width:1200px) {
+
+    body {
+    background-image:url(/images/bg.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:50% 50%;
+    }
+
+    #footer a {
+        color:#eee;
+    }
+}
+```
+
