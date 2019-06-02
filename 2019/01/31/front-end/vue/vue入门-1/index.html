@@ -18,7 +18,7 @@
     <link rel="dns-prefetch" href="http://yoursite.com">
     <!--SEO-->
 
-    <meta name="keywords" content="前端,vue">
+    <meta name="keywords" content="vue">
 
 
     <meta name="description" content="简介​    使用npm
@@ -161,7 +161,7 @@ store引入1npm ...">
             <i class="fa fa-tags"></i>
             <span class="tags-meta">
                 
-                    <a class="tag-link" href="/tags/vue/">vue</a> <a class="tag-link" href="/tags/前端/">前端</a>
+                    <a class="tag-link" href="/tags/vue/">vue</a>
                 
             </span>
         </span>
@@ -227,6 +227,33 @@ store引入1npm ...">
 </div>
 
 
+    <div id="comments">
+        
+	
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: true,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: 'zh-CN'.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
 
 
 
@@ -273,10 +300,7 @@ store引入1npm ...">
                 <span>Copyright &copy; 2017
                 </span> |
                 <span>
-                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> |
-                <span>
-                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                    <a href="//github.com/toughChow" class="copyright-links" target="_blank" rel="nofollow">ToughChow</a>
                 </span>
             </div>
         </div>
