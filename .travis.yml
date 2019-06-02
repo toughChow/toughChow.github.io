@@ -21,16 +21,27 @@ install:
 
 before_script:
   - export TZ='Asia/Shanghai' #设置时区
-  - npm install -g gulp  #全局安装Gulp
+#  - npm install -g gulp  #全局安装Gulp
 
 script:
-  - hexo clean && hexo g #清除缓存并生成静态文件
-  - gulp #执行gulp任务
+  - hexo clean
+  - hexo g
+  - hexo generate
 
 after_success: #执行成功时(以后扩展功能使用)
 
 after_script:
-  - ./_travis.sh #执行部署脚本
+  - git clone https://${GH_REF} .deploy_git
+  - cd .deploy_git
+  - git checkout master
+  - cd ../
+  - mv .deploy_git/.git/ ./public/
+  - cd ./public
+  - git config --global user.name "toughChow"
+  - git config --global user.email "toughChow@gmail.com"
+  - git add .
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force --quiet "https://$REPO_TOKEN@${GH_REF}" master:master
 # E: Build LifeCycle
 
 branches:
@@ -38,4 +49,8 @@ branches:
     - hexo #需要监听部署的分支
 env:
   global:
-   - GH_REF: github.com/toughChow/toughChow.github.io.git 
+   - GH_REF: github.com/toughChow/toughChow.github.io.git
+   - git config user.name "toughChow"
+   - git config user.email "toughChow@gmail.com"
+   - - sed -i "s/gh_token/$REPO_TOKEN/g" ./_config.yml
+   - hexo deploy
