@@ -5,7 +5,8 @@
 # Site
 title: 居居冲鸭
 subtitle:
-description: 书中自有我瑞奇
+description:
+keywords:
 author: Tough Chow
 language:
 timezone:
@@ -72,12 +73,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: hexo-theme-snippet
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy: 
-    type: git
-    repo: https://gh_token@github.com/toughChow/toughChow.github.io.git
- #   repo: https://github.com/toughChow/toughChow.github.io.git
-    branch: master
+deploy:
+  type:

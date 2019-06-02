@@ -1,37 +1,42 @@
-# 指定语言环境
-language: node_js
-# 指定需要sudo权限
-sudo: required
-# 指定node_js版本
-node_js: 
-  - 7.9.0
-# 指定缓存模块，可选。缓存可加快编译速度。
+language: node_js #使用Node语言环境
+node_js: stable #安装稳定版Node
+
+sudo: false
+
+#cache 启用缓存，加快构建速度
 cache:
   directories:
-    - node_modules
+    - "node_modules"
 
-# 指定博客源码分支，因人而异。hexo博客源码托管在独立repo则不用设置此项
+notifications: #启用通知
+  email:
+    recipients:
+      - snippet@91h5.cc #接收构建消息的邮件 不需要可设置为false
+    on_success: never #部署成功时，可设置alway never change
+    on_failure: always #部署失败时，同上
+
+# S: Build Lifecycle
+install:
+  - npm install  #安装依赖
+
+before_script:
+  - export TZ='Asia/Shanghai' #设置时区
+  - npm install -g gulp  #全局安装Gulp
+  - chmod +x _travis.sh  #授权脚本执行权限
+
+script:
+  - hexo clean && hexo g #清除缓存并生成静态文件
+  - gulp #执行gulp任务
+
+after_success: #执行成功时(以后扩展功能使用)
+
+after_script:
+  - ./_travis.sh #执行部署脚本
+# E: Build LifeCycle
+
 branches:
   only:
-    - hexo 
-
-before_install:
-  - npm install -g hexo-cli
-
-# Start: Build Lifecycle
-install:
-  - npm install
-  - npm install hexo-deployer-git --save
-
-# 执行清缓存，生成网页操作
-script:
-  - hexo generate
-
-# 设置git提交名，邮箱；替换真实token到_config.yml文件，最后depoy部署
-after_script:
-  - git config user.name "toughChow"
-  - git config user.email "toughChow@gmail.com"
-  # 替换同目录下的_config.yml文件中gh_token字符串为travis后台刚才配置的变量，注意此处sed命令用了双引号。单引号无效！
-  - sed -i "s/gh_token/$REPO_TOKEN/g" ./_config.yml
-  - hexo deploy
-# End: Build LifeCycle
+    - hexo #需要监听部署的分支
+env:
+  global:
+   - GH_REF: github.com/toughChow/toughChow.github.io.git 
