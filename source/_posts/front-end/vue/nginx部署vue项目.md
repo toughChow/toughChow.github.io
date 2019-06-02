@@ -1,10 +1,11 @@
 ---
 title: nginx部署vue
-tags: nginx
-categories: front-end
 date: 2019/02/21
+categories: ['前端']
+tags: ['vue','nginx']
+comments: true
+img:
 ---
-
 # vue打包
 
 ​	使用命令

@@ -1,10 +1,10 @@
 ---
 title: vue入门
-date: 2019/01/31   
-categories: ['前端'] 
-tags: ['前端','vue']       
-comments: false    
-img:               
+date: 2019/01/31
+categories: ['前端']
+tags: ['vue']       
+comments: true
+img:     
 ---
 # 简介
 
