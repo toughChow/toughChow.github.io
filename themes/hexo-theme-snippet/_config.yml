@@ -30,8 +30,8 @@ rss: /atom.xml
 
 ## Carousel
 carousel:
-  img: './img/head-img.jpg'
-  url: 'https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=xs0pypd2'
+#  img: './img/head-img.jpg'
+#  url: 'https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=xs0pypd2'
 
 # 各个小工具的设置
 
@@ -123,7 +123,7 @@ branding:
 
 ## 设置banner背景图片
 banner:
-    img: https://i.loli.net/2019/06/02/5cf3798fac73a24898.jpg
+    img: https://i.loli.net/2019/06/02/5cf3f10a465e251587.png
 
 ## 首页列表底部面板
 homePanel: true
@@ -157,7 +157,7 @@ declaration:
   enable: true
   title: '转载声明'
   tip: |-
-      商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+      商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">ToughChow</a>
 
 ## 文章打赏
 reward:
@@ -168,16 +168,19 @@ reward:
 ## 主题评论
 
 ## Valine评论
+# You can get your appid and appkey from https://leancloud.cn
+# more info please open https://valine.js.org
 valine:
-   enable: true
-   appId: xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz
-   appKey: erIpQac4azoCmgfBB7Dl9maa
-   placeholder: 说点什么吧
-   notify: false
-   verify: true
-   avatar: mm
-   meta: nick,mail
-   pageSize: 10
+  enable: true
+  appid:  jKI7u3GrmFMUnGdkexpDGjez-gzGzoHsz
+  appkey:  rvgiGSSFhSOrTCqjfa0W9Czm
+# mail notifier , https://github.com/xCss/Valine/wiki
+  notify: true 
+  verify: false # Verification code
+  placeholder: Just go go # comment box placeholder
+  avatar: mm # gravatar style
+  guest_info: nick,mail,link # custom comment header
+  pageSize: 10 # pagination size
 
 ### 畅言评论(需要ICP备案)
 changyan:
@@ -224,16 +227,16 @@ uyan:
 
 ## 网站访客统计
 visit_counter:
-   site: false
-   page: false
+   site: true
+   page: true
 
 ## 网站访问统计分析
 
 ### 网盟CNZZ统计
-cnzz_analytics: 1263868967
+cnzz_analytics: 
 
 ### 百度统计
-baidu_analytics:
+baidu_analytics: 594d6695d35ac3489067c0087b2a7e01
 
 ### 谷歌统计
 google_analytics:
@@ -248,6 +251,6 @@ baidu_site_verification:
 baidu_push: false
 
 #网站主题配置
-since: 2017
+since: 2018
 robot: 'all' ### 控制搜索引擎的抓取和索引编制行为，默认为all
 version: 1.2.3
