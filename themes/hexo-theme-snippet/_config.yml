@@ -2,6 +2,7 @@
 #   Site Information And Theme Configuration Settings
 #   language: zh-CN
 # ---------------------------------------------------------------
+language: zh-CN
 
 ## menu
 menu:
@@ -29,7 +30,7 @@ rss: /atom.xml
 
 ## Carousel
 carousel:
-  img: './img/head-img.jpg'
+  img: './img/head-img_bak.jpg'
   url: 'https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=xs0pypd2'
 
 # 各个小工具的设置
@@ -69,19 +70,19 @@ notification: |-
 social:
  - name: Github
    icon: git
-   href: //github.com/shenliyang
+   href: //github.com/toughChow
  - name: 邮箱
    icon: envelope-o
-   href: mailto:snippet@91h5.cc
- - name: 联系QQ
-   icon: qq
-   href: /
- - name: 微信
-   icon: weixin
-   href: /
- - name: QQ群
-   icon: users
-   href: /
+   href: mailto:toughchow@gmail.com
+# - name: 联系QQ
+#   icon: qq
+#   href: /
+# - name: 微信
+#   icon: weixin
+#   href: /
+# - name: QQ群
+#   icon: users
+#   href: /
  - name: RSS
    icon: feed
    href: /atom.xml
@@ -100,7 +101,7 @@ arch_config:
 
 ## 标签云设置
 tagcloud:
-  tag3d: false
+  tag3d: true
   textColour: '#444'
   outlineMethod: 'block'
   outlineColour: '#FFDAB9'
@@ -122,7 +123,7 @@ branding:
 
 ## 设置banner背景图片
 banner:
-    img: http://snippet.shenliyang.com/img/banner.jpg
+    img: https://i.loli.net/2019/06/02/5cf3798fac73a24898.jpg
 
 ## 首页列表底部面板
 homePanel: true
