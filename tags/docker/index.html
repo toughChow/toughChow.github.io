@@ -79,7 +79,7 @@
 <![endif]-->
 
 <body>
-    <header class="main-header" style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)">
+    <header class="main-header" style="background-image:url(https://i.loli.net/2019/06/02/5cf3798fac73a24898.jpg)">
     <div class="main-header-box">
         <a class="header-avatar" href="/" title="Tough Chow">
             <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
@@ -253,24 +253,12 @@
       <h3 class="title">社交</h3> 
         <div class="content social">
             
-	            <a href="//github.com/shenliyang" rel="external nofollow" title="Github" target="_blank">
+	            <a href="//github.com/toughChow" rel="external nofollow" title="Github" target="_blank">
 			    	<i class="git fa fa-git"></i>
 			    </a>
             
-	            <a href="mailto:snippet@91h5.cc" rel="external nofollow" title="邮箱" target="_blank">
+	            <a href="mailto:toughchow@gmail.com" rel="external nofollow" title="邮箱" target="_blank">
 			    	<i class="envelope-o fa fa-envelope-o"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
-			    	<i class="qq fa fa-qq"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="微信" target="_blank">
-			    	<i class="weixin fa fa-weixin"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="QQ群" target="_blank">
-			    	<i class="users fa fa-users"></i>
 			    </a>
             
 	            <a href="/atom.xml" rel="external nofollow" title="RSS" target="_blank">
@@ -303,7 +291,9 @@
     <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
         
-            <a href="/tags/Collection/" style="font-size: 10px;">Collection</a> <a href="/tags/IO/" style="font-size: 10px;">IO</a> <a href="/tags/Radix/" style="font-size: 10px;">Radix</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/english/" style="font-size: 10px;">english</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/junit/" style="font-size: 10px;">junit</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netty/" style="font-size: 20px;">netty</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/面试题/" style="font-size: 15px;">面试题</a>
+            <canvas width="300" height="300" id="tag-cloud-3d">
+                <a href="/tags/Collection/" style="font-size: 10px;">Collection</a> <a href="/tags/IO/" style="font-size: 10px;">IO</a> <a href="/tags/Radix/" style="font-size: 10px;">Radix</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/english/" style="font-size: 10px;">english</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/junit/" style="font-size: 10px;">junit</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/netty/" style="font-size: 20px;">netty</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/面试题/" style="font-size: 15px;">面试题</a>
+            </canvas>
         
     </div>
   </div>
@@ -371,6 +361,28 @@
 	<script src="/js/search.js?rev=@@hash"></script>
 
 
+
+    <script src="/assets/tagcanvas.min.js?rev=2.9"></script>
+    <script>
+        var tagOption = {
+            textColour: '#444', // 字体颜色
+            outlineMethod: 'block', // 选中模式
+            outlineColour: '#FFDAB9', // 选中模式的颜色
+            interval: 30 || 30, // 动画帧之间的时间间隔，值越大，转动幅度越大
+            textHeight: 13,
+            outlineRadius: 3,
+            freezeActive: true || '', // 选中的标签是否继续滚动
+            frontSelect: true || '', // 不选标签云后部的标签
+            initial: [0.1, -0.1],
+            depth: 0.5,
+            decel: 0.95,
+            maxSpeed: 0.03,
+            reverse: true || '', // 是否反向触发
+            fadeIn: 500, // 进入动画时间
+            wheelZoom: false || '' // 是否启用鼠标滚轮
+        }
+        TagCanvas.Start('tag-cloud-3d','',tagOption);
+    </script>
 
 
 
