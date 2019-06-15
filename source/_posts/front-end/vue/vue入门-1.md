@@ -4,7 +4,6 @@ date: 2019/01/31
 categories: ['前端']
 tags: ['vue']       
 comments: true
-img:     
 ---
 # 简介
 
