@@ -180,6 +180,27 @@
         <div class="post-content">
             <div class="post-head home-post-head">
                 <h1 class="post-title">
+                    <a href="/2019/03/16/java/io/netty/netty-粘包和拆包/">TCP粘包和拆包</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime title>
+                        2019年03月16日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+                
+                    简介​    TCP是个流协议，在TCP底层并不了解上层业务数据的具体含义，它会根据TCP缓存区的实际情况进行包的划分。所以在业务上，一个完整的包可能会被TCP拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送。这就是...
+                
+            </p>
+        </div>
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title">
                     <a href="/2019/03/16/java/io/netty/netty-入门/">netty入门</a>
                 </h1>
                 <div class="post-meta">  &bull;
@@ -195,27 +216,6 @@
 创建ServerSocketChannel,配置它为非阻塞模式；
 绑定监听，配置TCP参数，例如backlog大小；
 创建一个独...
-                
-            </p>
-        </div>
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title">
-                    <a href="/2019/03/16/java/io/netty/netty-粘包和拆包/">TCP粘包和拆包</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime title>
-                        2019年03月16日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                
-                    简介​    TCP是个流协议，在TCP底层并不了解上层业务数据的具体含义，它会根据TCP缓存区的实际情况进行包的划分。所以在业务上，一个完整的包可能会被TCP拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送。这就是...
                 
             </p>
         </div>
