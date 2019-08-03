@@ -1,7 +1,7 @@
 ---
 title: 多关键字List去重
 tags: Collection
-categories: Java
+categories: ['后端','Java']
 date: 2018/12/12
 ---
 

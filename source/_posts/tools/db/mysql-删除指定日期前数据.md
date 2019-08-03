@@ -1,7 +1,7 @@
 ---
 title: mysql删除指定日期前数据
 tags: mysql
-categories: db
+categories: ['工具','db']
 date: 2018/11/29
 ---
 

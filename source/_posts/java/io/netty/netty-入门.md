@@ -1,7 +1,7 @@
 ---
 title: netty入门
 tags: netty
-categories: http
+categories: ['前端','http']
 date: 2019/03/16
 ---
 

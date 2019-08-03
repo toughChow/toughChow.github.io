@@ -1,7 +1,7 @@
 ---
 title: Hexo-Next小记
 tags: hexo
-categories: 建站
+categories: ['工具']
 date: 2018/11/27
 ---
 # Hexo简易安装

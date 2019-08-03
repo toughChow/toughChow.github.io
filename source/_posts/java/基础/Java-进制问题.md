@@ -1,7 +1,7 @@
 ---
 title: 十进制-十六进制转换问题
 tags: Radix
-categories: Java
+categories: ['后端','Java']
 date: 2019/01/08
 ---
 

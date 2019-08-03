@@ -1,7 +1,7 @@
 ---
 title: Docker 自定义容器镜像
 tags: docker
-categories: skill
+categories: ['工具']
 date: 2019/03/08
 ---
 # 将容器变成镜像

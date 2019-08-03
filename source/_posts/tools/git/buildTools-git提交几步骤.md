@@ -1,7 +1,7 @@
 ---
 title: git提交步骤
 tags: git
-categories: BuildTools
+categories: ['工具']
 date: 2018/12/29
 ---
 

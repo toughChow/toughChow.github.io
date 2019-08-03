@@ -1,7 +1,7 @@
 ---
 title: cas-server中KeyStore配置
 tags: keytool
-categories: cas
+categories: ['工具','cas']
 date: 2018/11/30
 ---
 

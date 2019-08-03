@@ -1,7 +1,7 @@
 ---
 title: Retrofit2调用远程接口
 tags: http
-categories: Java
+categories: ['后端','Java']
 date: 2019/03/08
 ---
 

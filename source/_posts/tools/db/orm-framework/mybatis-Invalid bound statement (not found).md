@@ -1,7 +1,7 @@
 ---
 title: Mybatis:Invalid bound statement (not found)
 tags: mybatis
-categories: db
+categories: ['工具','db']
 date: 2018/11/17
 ---
 # mybatis-- Invalid bound statement (not found)

@@ -1,7 +1,7 @@
 ---
 title: 并发基础
 tags: 并发
-categories: Java
+categories: ['后端','Java']
 date: 2019/03/05
 ---
 

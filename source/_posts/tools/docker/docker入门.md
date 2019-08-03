@@ -1,7 +1,7 @@
 ---
 title: Docker 入门
 tags: docker
-categories: skill
+categories: ['工具']
 date: 2019/01/10
 ---
 # 基础命令

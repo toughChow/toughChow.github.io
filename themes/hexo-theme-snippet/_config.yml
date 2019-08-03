@@ -61,9 +61,9 @@ jsonContent:
 ## 网站公告设置
 notification: |-
             <p>
-                主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
-                主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
-                支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
+                程序员必备商城：<a href="http://pv4y0fx7z.bkt.clouddn.com/shopping.jpg" title="fork me" target="_blank">杂货铺关注</a> <br/>
+#                主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
+#                支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
             </p>
 
 ## 社交设置
@@ -175,7 +175,7 @@ valine:
   appid:  jKI7u3GrmFMUnGdkexpDGjez-gzGzoHsz
   appkey:  rvgiGSSFhSOrTCqjfa0W9Czm
 # mail notifier , https://github.com/xCss/Valine/wiki
-  notify: true 
+  notify: true
   verify: false # Verification code
   placeholder: Just go go # comment box placeholder
   avatar: mm # gravatar style
@@ -233,7 +233,7 @@ visit_counter:
 ## 网站访问统计分析
 
 ### 网盟CNZZ统计
-cnzz_analytics: 
+cnzz_analytics:
 
 ### 百度统计
 baidu_analytics: 594d6695d35ac3489067c0087b2a7e01

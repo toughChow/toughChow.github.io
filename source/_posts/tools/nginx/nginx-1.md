@@ -1,7 +1,7 @@
 ---
 title: nginx入门
 tags: nginx
-categories: skill
+categories: ['工具']
 date: 2019/03/14
 ---
 # 简述

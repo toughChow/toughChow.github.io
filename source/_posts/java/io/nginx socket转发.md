@@ -1,7 +1,7 @@
 ---
 title: nginx socket短链接转发
 tags: nginx
-categories: Java
+categories: ['后端','Java']
 date: 2019/03/13
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: cas-v5.3.6骨架搭建
 types: cas
-categories: cas
+categories: ['工具','cas']
 date: 2018/11/30
 ---
 
