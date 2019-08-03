@@ -62,8 +62,6 @@ jsonContent:
 notification: |-
             <p>
                 程序员必备商城：<a href="http://pv4y0fx7z.bkt.clouddn.com/shopping.jpg" title="fork me" target="_blank">杂货铺关注</a> <br/>
-#                主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
-#                支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
             </p>
 
 ## 社交设置
