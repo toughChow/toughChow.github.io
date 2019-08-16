@@ -31,7 +31,7 @@ rss: /atom.xml
 ## Carousel
 carousel:
   img: './img/head-img_bak.jpg'
-  url: 'https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=xs0pypd2'
+  url: 'http:toughchow.top'
 
 # 各个小工具的设置
 
@@ -121,7 +121,7 @@ branding:
 
 ## 设置banner背景图片
 banner:
-    img: './img/bg.jpg'
+    img: 'http://pv4y0fx7z.bkt.clouddn.com/bl_bg.jpg'
 
 ## 首页列表底部面板
 homePanel: true
