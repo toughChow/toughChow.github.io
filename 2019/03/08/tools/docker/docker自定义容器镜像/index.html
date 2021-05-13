@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="将容器变成镜像法一 docker commit1docker commit &lt;container&gt; [repo:tag]  当我们在制作自己的镜像的时候，会在container中安装一些工具，修改配置，如果不做commit保存起来，那么container停止后再启动，这些更改就消失了。 验证例子 docker create --name myjava -it java &#x2F;bin&#x2F;bas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 自定义容器镜像">
+<meta property="og:url" content="http://example.com/2019/03/08/tools/docker/docker%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="将容器变成镜像法一 docker commit1docker commit &lt;container&gt; [repo:tag]  当我们在制作自己的镜像的时候，会在container中安装一些工具，修改配置，如果不做commit保存起来，那么container停止后再启动，这些更改就消失了。 验证例子 docker create --name myjava -it java &#x2F;bin&#x2F;bas">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-03-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-13T08:45:30.366Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2019/03/08/tools/docker/docker%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Docker 自定义容器镜像 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/03/08/tools/docker/docker%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker 自定义容器镜像
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-08T00:00:00+08:00">2019-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-13 16:45:30" itemprop="dateModified" datetime="2021-05-13T16:45:30+08:00">2021-05-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="将容器变成镜像"><a href="#将容器变成镜像" class="headerlink" title="将容器变成镜像"></a>将容器变成镜像</h1><h2 id="法一-docker-commit"><a href="#法一-docker-commit" class="headerlink" title="法一 docker commit"></a>法一 docker commit</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit &lt;container&gt; [repo:tag]</span><br></pre></td></tr></table></figure>
+
+<p>当我们在制作自己的镜像的时候，会在container中安装一些工具，修改配置，如果不做commit保存起来，那么container停止后再启动，这些更改就消失了。</p>
+<h3 id="验证例子"><a href="#验证例子" class="headerlink" title="验证例子"></a>验证例子</h3><ol>
+<li><code>docker create --name myjava -it java /bin/bash</code></li>
+<li><code>docker start myjava</code></li>
+<li><code>docker ps</code></li>
+<li><code>docker exec -it d5c89f21f0d3 /bin/bash</code></li>
+<li>创建一个自己的文件夹</li>
+<li><code>docker commit d5c89f21f0d3 myjava</code></li>
+<li><code>docker images</code></li>
+<li><code>docker run -it myjava ls</code></li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>最方便 最快速</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>不规范 无法自动化</li>
+</ul>
+<h2 id="法二-Buildfile"><a href="#法二-Buildfile" class="headerlink" title="法二 Buildfile"></a>法二 Buildfile</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM nimmis/ubuntu:14.04</span><br><span class="line">MAINTAINER nimmis&lt;kjell.havneskold@gmail.com&gt;</span><br><span class="line">ENV DEBIAN_FRONTEND noninteractive</span><br><span class="line">ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line">RUN apt-get install -y software-properties-common &amp;&amp; \</span><br><span class="line">add-apt-repository ppa:openjdk-r/ppa -y &amp;&amp; \</span><br><span class="line">apt-get update &amp;&amp; \</span><br><span class="line">apt-get install -y --no-intstall-recommends openjdk-8-jre &amp;&amp; \</span><br><span class="line">rm -rf /var/lib/apt/lists/*</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建镜像"><a href="#创建镜像" class="headerlink" title="创建镜像"></a>创建镜像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t leader/java .</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>leader/java</code>为命名的名称，<code>.</code>为在当前文件夹寻找该文件</p>
+<h3 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h3><p>BuildFile中执行的环境并非本系统环境，而是docker环境。</p>
+<p>如在文件中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN ./hello.sh #hello.sh 为本系统当前文件夹下一个输出`hello world`的文件</span><br></pre></td></tr></table></figure>
+
+<p>这样执行是不会成功的。</p>
+<p>需要在文件中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ADD hello.shh /bin/hello.sh</span><br><span class="line">RUN /bin/hello.sh</span><br></pre></td></tr></table></figure>
+
+<p>才可以执行。</p>
+<h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><p>Build过程中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN curl http://baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>无法成功，此时需要在文件中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENV http_proxy=http:///xxx</span><br><span class="line">RUN curl http://baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>代理后，才可以成功。</p>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><p>制作ubuntu+java+tomcat+ssh server镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">FROM ubunntu</span><br><span class="line">MAINTAINER tough&lt;toughchow@gmail.com&gt;</span><br><span class="line">#更新源，安装ssh server</span><br><span class="line">RUN echo &quot;deb http://archive.ubuntu.com/ubuntu precise main universe&quot;&gt;/etc/apt/sources.list</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install -y openssh-server</span><br><span class="line">RUN mkdir -p /var/run/sshd</span><br><span class="line">#设置root ssh远程登录密码为123456</span><br><span class="line">RUN echo &quot;root:123456&quot;|chpasswd</span><br><span class="line">#添加oracle java7源，一次性安装vim wget curl java7 tomcat7等必备软件</span><br><span class="line">RUN apt-get install python-software-properties</span><br><span class="line">RUN add-apt-repository ppa:webupd8team/java</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install -y vim wget curl oracle-java7-installer tomcat7</span><br><span class="line">#设置JAVA_HOME环境变量</span><br><span class="line">RUN update-alternatives --display java</span><br><span class="line">RUN echo &quot;JAVA_HOME=/usr/lib/jvm/java-7-oracle&quot;&gt;&gt;/etc/enviroment</span><br><span class="line">RUN echo &quot;JAVA_HOME=/usr/lib/jvm/java-7-oracle&quot;&gt;&gt;/etc/default/tomcat7</span><br><span class="line"></span><br><span class="line">#容器需要开放ssh22端口</span><br><span class="line">EXPOSE 22</span><br><span class="line"></span><br><span class="line">#容器需要开放Tomcat 8080端口</span><br><span class="line">EXPOSE 8080</span><br><span class="line"></span><br><span class="line">#设置Tomcat7初始化运行，SSH终端放服务器作为后台运行</span><br><span class="line">ENTRYPOINT service tomcat7 start &amp;&amp; /usr/sbin/sshd -D</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>-y</code>为自动安装，不需要一直输入yes</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/05/java/%E5%B9%B6%E5%8F%91/Java-%E5%B9%B6%E5%8F%911-%E5%9F%BA%E7%A1%80/" rel="prev" title="并发基础">
+      <i class="fa fa-chevron-left"></i> 并发基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/08/java/%E6%B5%8B%E8%AF%95/java-MockMvc/" rel="next" title="MockMvc测试">
+      MockMvc测试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E5%AE%B9%E5%99%A8%E5%8F%98%E6%88%90%E9%95%9C%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">将容器变成镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%95%E4%B8%80-docker-commit"><span class="nav-number">1.1.</span> <span class="nav-text">法一 docker commit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.1.</span> <span class="nav-text">验证例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%95%E4%BA%8C-Buildfile"><span class="nav-number">1.2.</span> <span class="nav-text">法二 Buildfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">创建镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tip"><span class="nav-number">1.2.3.</span> <span class="nav-text">tip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="nav-number">1.2.4.</span> <span class="nav-text">案例分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">实战</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
