@@ -58,7 +58,7 @@
   <entry>
     <title></title>
     <url>/2021/05/31/Java/Basic/Basic1/</url>
-    <content><![CDATA[<p>title: 十进制-十六进制转换问题<br>tags: Basic<br>categories: [‘Java’]<br>date: 2019/01/08</p>
+    <content><![CDATA[<p>title: 十进制-十六进制转换问题<br>tags: Basic<br>categories: [‘Java’]<br>date: 2021/05/31</p>
 <h1 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h1><h2 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;</p>
 <h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>没有面向对象易维护、易复用、易扩展</p>
 <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p>易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护</p>
@@ -518,28 +518,6 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql删除指定日期前数据</title>
-    <url>/2018/11/29/tools/db/mysql-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E5%89%8D%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>​    由于数据上报产生数据量过大，因此需要定期删除无用数据。</p>
-<h1 id="程序方式"><a href="#程序方式" class="headerlink" title="程序方式"></a>程序方式</h1><p>​    mysql语句如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM t_iot_cb_device_data_changed WHERE EVENT_TIME IS NULL OR DATE(EVENT_TIME) &lt;= DATE(DATE_SUB(NOW(),INTERVAL 15 DAY))</span><br></pre></td></tr></table></figure>
-
-<p>​    其中<code>EVENT_TIME</code>为要进行判断的时间依据。</p>
-<p>​    此处为删除15天以前的数据，若需要删除几个月以前的数据，（以三个月为例）则为 <code>INTERVAL 3 MONTH</code>。</p>
-<h1 id="通过存储过程解决"><a href="#通过存储过程解决" class="headerlink" title="通过存储过程解决"></a>通过存储过程解决</h1><h2 id="1-创建存储过程"><a href="#1-创建存储过程" class="headerlink" title="1. 创建存储过程"></a>1. 创建存储过程</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP PROCEDURE IF EXISTS pro_clean_data;</span><br><span class="line">CREATE PROCEDURE pro_clean_data()</span><br><span class="line">    BEGIN  </span><br><span class="line">      DELETE FROM t_iot_cb_device_data_changed WHERE EVENT_TIME IS NULL OR DATE(EVENT_TIME) &lt;= DATE(DATE_SUB(NOW(),INTERVAL 15 DAY));</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-创建事件"><a href="#2-创建事件" class="headerlink" title="2. 创建事件"></a>2. 创建事件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE EVENT IF NOT EXISTS event_time_cleaner</span><br><span class="line">ON SCHEDULE EVERY 1 DAY STARTS &#x27;2018-12-19  01:00:00&#x27; </span><br><span class="line">ON COMPLETION PRESERVE </span><br><span class="line">DO CALL pro_clean_data();</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>工具</category>
-        <category>db</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cas-server中KeyStore配置</title>
     <url>/2018/11/30/tools/cas/cas-keystore/</url>
     <content><![CDATA[<h1 id="生成key服务端密钥文件"><a href="#生成key服务端密钥文件" class="headerlink" title="生成key服务端密钥文件"></a>生成key服务端密钥文件</h1><p><code>keytool -genkeypair -keyalg RSA -keysize 1024 -sigalg SHA1withRSA -validity 36500 -alias sav.cas.com -keystore d:/thekeystore.thekeystore -dname &quot;CN=sav.cas.com,L=NanJing,ST=JiangSu,C=CN&quot;</code></p>
@@ -594,6 +572,28 @@
         <category>工具</category>
         <category>cas</category>
       </categories>
+  </entry>
+  <entry>
+    <title>mysql删除指定日期前数据</title>
+    <url>/2018/11/29/tools/db/mysql-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E5%89%8D%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>​    由于数据上报产生数据量过大，因此需要定期删除无用数据。</p>
+<h1 id="程序方式"><a href="#程序方式" class="headerlink" title="程序方式"></a>程序方式</h1><p>​    mysql语句如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DELETE FROM t_iot_cb_device_data_changed WHERE EVENT_TIME IS NULL OR DATE(EVENT_TIME) &lt;= DATE(DATE_SUB(NOW(),INTERVAL 15 DAY))</span><br></pre></td></tr></table></figure>
+
+<p>​    其中<code>EVENT_TIME</code>为要进行判断的时间依据。</p>
+<p>​    此处为删除15天以前的数据，若需要删除几个月以前的数据，（以三个月为例）则为 <code>INTERVAL 3 MONTH</code>。</p>
+<h1 id="通过存储过程解决"><a href="#通过存储过程解决" class="headerlink" title="通过存储过程解决"></a>通过存储过程解决</h1><h2 id="1-创建存储过程"><a href="#1-创建存储过程" class="headerlink" title="1. 创建存储过程"></a>1. 创建存储过程</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DROP PROCEDURE IF EXISTS pro_clean_data;</span><br><span class="line">CREATE PROCEDURE pro_clean_data()</span><br><span class="line">    BEGIN  </span><br><span class="line">      DELETE FROM t_iot_cb_device_data_changed WHERE EVENT_TIME IS NULL OR DATE(EVENT_TIME) &lt;= DATE(DATE_SUB(NOW(),INTERVAL 15 DAY));</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建事件"><a href="#2-创建事件" class="headerlink" title="2. 创建事件"></a>2. 创建事件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE EVENT IF NOT EXISTS event_time_cleaner</span><br><span class="line">ON SCHEDULE EVERY 1 DAY STARTS &#x27;2018-12-19  01:00:00&#x27; </span><br><span class="line">ON COMPLETION PRESERVE </span><br><span class="line">DO CALL pro_clean_data();</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>工具</category>
+        <category>db</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
   </entry>
   <entry>
     <title>Docker 入门</title>
