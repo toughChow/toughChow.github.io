@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/R-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/R-16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -99,6 +99,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -138,11 +139,38 @@
     <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -168,7 +196,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/12/java/%E9%9B%86%E5%90%88/Java-List%E5%8E%BB%E9%87%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -223,24 +251,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="List去重（n个条件去重）"><a href="#List去重（n个条件去重）" class="headerlink" title="List去重（n个条件去重）"></a>List去重（n个条件去重）</h1><p>​    最近遇到一个情况，需要在一个List<Object>中去除包含多个字段相同的重复对象。寻找Lambda无果，只好使用一下方法。</p>
+          <h1 id="List去重（n个条件去重）"><a href="#List去重（n个条件去重）" class="headerlink" title="List去重（n个条件去重）"></a>List去重（n个条件去重）</h1><p>​    最近遇到一个情况，需要在一个List<object>中去除包含多个字段相同的重复对象。寻找Lambda无果，只好使用一下方法。</object></p>
 <h2 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h2><p>​    目前存在DepotLogs对象，其中的barCode和posId可能存在两个DepotLogs对象的两个属性值相同，因此需要去除重复对象只留一条。DepotLogs对象如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepotLogsPO</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String barCode;</span><br><span class="line">    <span class="keyword">private</span> Long posId;</span><br><span class="line">    <span class="keyword">private</span> String action;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>​    通过重写DepotLogs的equals方法解决问题</p>
 <h3 id="重写equals方法"><a href="#重写equals方法" class="headerlink" title="重写equals方法"></a>重写equals方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(obj == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    DepotLogsPO depotLogsPO = (DepotLogsPO) obj;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.getPosId().compareTo(depotLogsPO.getPosId()) == <span class="number">0</span></span><br><span class="line">       &amp;&amp; <span class="keyword">this</span>.getBarCode().equals(depotLogsPO.getBarCode()))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;DepotLogsPO&gt; <span class="title">getNoRepeatPostIdAndBarCodeDepotLogsList</span><span class="params">(List&lt;DepotLogsPO&gt; depotLogsPOS)</span> </span>&#123;</span><br><span class="line">    List&lt;DepotLogsPO&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span>(CollectionUtils.isNotEmpty(depotLogsPOS)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (DepotLogsPO po : depotLogsPOS) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!list.contains(po)) &#123;</span><br><span class="line">                list.add(po);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    至此，问题就解决了。设想过Lambda的方法实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;DepotLogsPO&gt; contents = page.getContent();</span><br><span class="line">List&lt;DepotLogsPO&gt; tmps = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">contents.forEach(content -&gt; &#123;</span><br><span class="line">    DepotLogsPO depotLogsPO = contents.stream().filter(</span><br><span class="line">        v -&gt; &#123; <span class="keyword">boolean</span> flag = v.getPosId() == content.getPosId() &amp;&amp; v.getBarCode().equals(content.getBarCode());</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;).distinct().collect(Collectors.toList()).get(<span class="number">0</span>);</span><br><span class="line">    tmps.add(depotLogsPO);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>​    但是其中content中也存在重复对象，感觉解决起来特别麻烦。若有大神知道怎么用Lambda解决，还望多多指点。</p>
-<hr>
-<h1 id="List多字段去重"><a href="#List多字段去重" class="headerlink" title="List多字段去重"></a>List多字段去重</h1><p>​    根据<code>devId</code>和<code>cmd</code>去重，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;SmartLightDispatcherPO&gt; distinctList = lists.stream().collect(Collectors.collectingAndThen(</span><br><span class="line">                Collectors.toCollection(() -&gt; <span class="keyword">new</span> TreeSet&lt;&gt;(Comparator.comparing(o -&gt; o.getDevId() + <span class="string">&quot;;&quot;</span> + o.getCmd()))), ArrayList::<span class="keyword">new</span></span><br><span class="line">        ));</span><br></pre></td></tr></table></figure>
-
-
+<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/12/java/%E9%9B%86%E5%90%88/Java-List%E5%8E%BB%E9%87%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -262,7 +288,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/30/tools/cas/cas-keystore/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -322,7 +348,14 @@
 <h1 id="导入cacerts证书库文件"><a href="#导入cacerts证书库文件" class="headerlink" title="导入cacerts证书库文件"></a>导入cacerts证书库文件</h1><p><code> keytool -import -alias sav.cas.com -keystore &#39;D:\Program Files\Java\jdk1.8.0_172\jre\lib\security\cacerts&#39; -file D:/thekeystore.cer -trustcacerts</code></p>
 <h1 id="查看生成的key"><a href="#查看生成的key" class="headerlink" title="查看生成的key"></a>查看生成的key</h1><p><code>keytool -list -v -keystore thekeystore.thekeystore</code></p>
 <h1 id="生成客户端密钥库文件"><a href="#生成客户端密钥库文件" class="headerlink" title="生成客户端密钥库文件"></a>生成客户端密钥库文件</h1><p><code>keytool -import -trustcacerts -alias cas -storepass changeit -file thekeyst ore.cer -keystore thekeystore</code></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/tools/cas/cas-keystore/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -344,7 +377,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/30/tools/cas/cas-v5.3.6JDBC%E8%AE%A4%E8%AF%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -408,11 +441,15 @@
 <h1 id="新增JDBC认证"><a href="#新增JDBC认证" class="headerlink" title="新增JDBC认证"></a>新增JDBC认证</h1><p>​    在<code>application.perperties</code>文件中新增如下属性</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加jdbc认证</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].sql</span>=<span class="string">SELECT * FROM sys_user WHERE user_name=?</span></span><br><span class="line"><span class="comment">#那一个字段作为密码字段</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].fieldPassword</span>=<span class="string">password</span></span><br><span class="line"><span class="comment">#配置数据库连接</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].url</span>=<span class="string">jdbc:mysql://localhost:3306/db_ids?useUnicode=true&amp;amp;characterEncoding=utf8</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].dialect</span>=<span class="string">org.hibernate.dialect.MySQL5Dialect</span></span><br><span class="line"><span class="comment">#数据库用户名</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].user</span>=<span class="string">root</span></span><br><span class="line"><span class="comment">#数据库密码</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].password</span>=<span class="string"></span></span><br><span class="line"><span class="comment">#mysql驱动</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].driverClass</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="新增加密方式"><a href="#新增加密方式" class="headerlink" title="新增加密方式"></a>新增加密方式</h1><p>​    在<code>application.properties</code>文件新增SHA-1加密方式</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#配置加密策略</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].passwordEncoder.type</span>=<span class="string">DEFAULT</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].passwordEncoder.characterEncoding</span>=<span class="string">UTF-8</span></span><br><span class="line"><span class="meta">cas.authn.jdbc.query[0].passwordEncoder.encodingAlgorithm</span>=<span class="string">SHA-1</span></span><br><span class="line"><span class="comment">#Query Database Authentication 数据库查询校验用户名结束</span></span><br></pre></td></tr></table></figure>
-
-<p>​    到这里就可以进行测试了!</p>
-
+<h1 id="新增加密方式"><a href="#新增加密方式" class="headerlink" title="新增加密方式"></a>新增加密方式</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/tools/cas/cas-v5.3.6JDBC%E8%AE%A4%E8%AF%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -434,7 +471,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/30/tools/cas/cas-v5.3.6%E9%AA%A8%E6%9E%B6%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -498,6 +535,14 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">cas.authn.accept.users</span>=<span class="string">casuser::Mellon</span></span><br></pre></td></tr></table></figure>
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/tools/cas/cas-v5.3.6%E9%AA%A8%E6%9E%B6%E6%90%AD%E5%BB%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -519,7 +564,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/30/tools/idea/buildTools-idea%E4%BC%98%E5%8C%96(%E9%A1%B9%E7%9B%AE%E5%BA%9E%E5%A4%A7%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -575,6 +620,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-Xms1024m</span><br><span class="line">-Xms1024m</span><br><span class="line">-Xmx6144m</span><br><span class="line">-XX:ReservedCodeCacheSize=512m</span><br><span class="line">-XX:+UseCompressedOops</span><br><span class="line">-Dfile.encoding=UTF-8</span><br><span class="line">-XX:+UseConcMarkSweepGC</span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=50</span><br><span class="line">-ea</span><br><span class="line">-Dsun.io.useCanonCaches=false</span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line">-Xverify:none</span><br><span class="line"></span><br><span class="line">-XX:ErrorFile=$USER_HOME/java_error_in_idea_%p.log</span><br><span class="line">-XX:HeapDumpPath=$USER_HOME/java_error_in_idea.hprof</span><br><span class="line">-Xbootclasspath/a:../lib/boot.jar</span><br><span class="line">-XX:MaxMetaspaceSize=2048m</span><br></pre></td></tr></table></figure>
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/tools/idea/buildTools-idea%E4%BC%98%E5%8C%96(%E9%A1%B9%E7%9B%AE%E5%BA%9E%E5%A4%A7%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD)/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -596,7 +649,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/29/tools/db/mysql-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E5%89%8D%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -658,10 +711,14 @@
 <p>​    其中<code>EVENT_TIME</code>为要进行判断的时间依据。</p>
 <p>​    此处为删除15天以前的数据，若需要删除几个月以前的数据，（以三个月为例）则为 <code>INTERVAL 3 MONTH</code>。</p>
 <h1 id="通过存储过程解决"><a href="#通过存储过程解决" class="headerlink" title="通过存储过程解决"></a>通过存储过程解决</h1><h2 id="1-创建存储过程"><a href="#1-创建存储过程" class="headerlink" title="1. 创建存储过程"></a>1. 创建存储过程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DROP PROCEDURE IF EXISTS pro_clean_data;</span><br><span class="line">CREATE PROCEDURE pro_clean_data()</span><br><span class="line">    BEGIN  </span><br><span class="line">      DELETE FROM t_iot_cb_device_data_changed WHERE EVENT_TIME IS NULL OR DATE(EVENT_TIME) &lt;= DATE(DATE_SUB(NOW(),INTERVAL 15 DAY));</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-创建事件"><a href="#2-创建事件" class="headerlink" title="2. 创建事件"></a>2. 创建事件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE EVENT IF NOT EXISTS event_time_cleaner</span><br><span class="line">ON SCHEDULE EVERY 1 DAY STARTS &#x27;2018-12-19  01:00:00&#x27; </span><br><span class="line">ON COMPLETION PRESERVE </span><br><span class="line">DO CALL pro_clean_data();</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/29/tools/db/mysql-%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E5%89%8D%E6%95%B0%E6%8D%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -683,7 +740,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/27/tools/interesting/hexo-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -738,18 +795,14 @@
 <h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p><code>npm install -g hexo-cli</code></p>
 <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="代码复制功能"><a href="#代码复制功能" class="headerlink" title="代码复制功能"></a>代码复制功能</h2><h3 id="clipboardjs"><a href="#clipboardjs" class="headerlink" title="clipboardjs"></a>clipboardjs</h3><p>​    下载第三方插件<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js">clipboard.min.js</a>，在next主题下的<code>source\js\src</code>目录下新建<code>clipboard-use.js</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123; </span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  <span class="keyword">var</span> initCopyCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> copyHtml = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;button class=&quot;btn-copy&quot; data-clipboard-snippet=&quot;&quot;&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;  &lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;span&gt;copy&lt;/span&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;/button&gt;&#x27;</span>;</span><br><span class="line">    $(<span class="string">&quot;.highlight .code pre&quot;</span>).before(copyHtml);</span><br><span class="line">    <span class="keyword">new</span> ClipboardJS(<span class="string">&#x27;.btn-copy&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="function"><span class="keyword">function</span>(<span class="params">trigger</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> trigger.nextElementSibling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  initCopyCode();</span><br><span class="line">&#125;(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
-
-<p>​    在next主题下的<code>source\css\_custom\custom.styl</code>添加如下代码</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//代码块复制按钮</span><br><span class="line"><span class="selector-class">.highlight</span>&#123;</span><br><span class="line">//方便copy代码按钮（btn-copy）的定位</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">#fcfcfc</span>,<span class="number">#eee</span>);</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#d5d5d5</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  -webkit-user-select: none;</span><br><span class="line">  -moz-user-select: none;</span><br><span class="line">  -ms-user-select: none;</span><br><span class="line">  user-select: none;</span><br><span class="line">  -webkit-appearance: none;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">13px</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: <span class="number">700</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">  -webkit-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">  -o-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">6px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.highlight</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.btn-copy</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>​    在next主题下的<code>layout\_layout.swig</code>文件中引用clipboardjs</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> src=<span class="string">&quot;/js/src/clipboard.min.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/src/clipboard-use.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>​    这样，复制功能就ok惹。</p>
-<h1 id="背景图"><a href="#背景图" class="headerlink" title="背景图"></a>背景图</h1><p>​    在source/css/_custom.styl中添加</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (min-width:1200px) &#123;</span><br><span class="line"></span><br><span class="line">    body &#123;</span><br><span class="line">    background-image:url(/images/bg.jpg);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:50% 50%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    #footer a &#123;</span><br><span class="line">        color:#eee;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/27/tools/interesting/hexo-%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -771,7 +824,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/17/tools/gradle/buildTools-gradle%E9%85%8D%E7%BD%AE%E6%BA%90%E5%8F%8A%E5%9C%B0%E5%9D%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -826,6 +879,14 @@
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">allprojects&#123;</span></span><br><span class="line">    <span class="string">repositories</span> &#123;</span><br><span class="line">        <span class="string">def</span> <span class="string">REPOSITORY_URL</span> <span class="string">=</span> <span class="string">&#x27;http://maven.aliyun.com/nexus/content/groups/public/&#x27;</span></span><br><span class="line">        <span class="string">all</span> &#123; <span class="string">ArtifactRepository</span> <span class="string">repo</span> <span class="string">-&gt;</span></span><br><span class="line">            <span class="string">if(repo</span> <span class="string">instanceof</span> <span class="string">MavenArtifactRepository)</span>&#123;</span><br><span class="line">                <span class="string">def</span> <span class="string">url</span> <span class="string">=</span> <span class="string">repo.url.toString()</span></span><br><span class="line">                <span class="string">if</span> <span class="string">(url.startsWith(&#x27;https://repo1.maven.org/maven2&#x27;)</span> <span class="string">||</span> <span class="string">url.startsWith(&#x27;https://jcenter.bintray.com/&#x27;))</span> &#123;</span><br><span class="line">                    <span class="string">project.logger.lifecycle</span> <span class="string">&quot;Repository $&#123;repo.url&#125; replaced by $REPOSITORY_URL.&quot;</span></span><br><span class="line">                    <span class="string">remove</span> <span class="string">repo</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="string">maven</span> &#123;</span><br><span class="line">            <span class="string">url</span> <span class="string">REPOSITORY_URL</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/17/tools/gradle/buildTools-gradle%E9%85%8D%E7%BD%AE%E6%BA%90%E5%8F%8A%E5%9C%B0%E5%9D%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -847,7 +908,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/17/tools/db/orm-framework/mybatis-Invalid%20bound%20statement%20(not%20found)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Tough Chow">
       <meta itemprop="description" content="">
     </span>
@@ -907,6 +968,14 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">        &lt;resource&gt;</span><br><span class="line">            &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;**<span class="comment">/*.xml&lt;/include&gt;</span></span><br><span class="line"><span class="comment">            &lt;/includes&gt;</span></span><br><span class="line"><span class="comment">            &lt;filtering&gt;false&lt;/filtering&gt;</span></span><br><span class="line"><span class="comment">        &lt;/resource&gt;</span></span><br><span class="line"><span class="comment">&lt;/resources&gt;</span></span><br></pre></td></tr></table></figure>
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/17/tools/db/orm-framework/mybatis-Invalid%20bound%20statement%20(not%20found)/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -982,6 +1051,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tough Chow"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Tough Chow</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -1006,6 +1077,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toughchow" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toughchow" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:toughchow@foxmail.com" title="E-Mail → mailto:toughchow@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -1027,17 +1106,35 @@
 
 <div class="copyright">
   
-  &copy; 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Tough Chow</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -1071,6 +1168,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
