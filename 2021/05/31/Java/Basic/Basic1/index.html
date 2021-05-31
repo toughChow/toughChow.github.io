@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/R-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/R-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="title: 十进制-十六进制转换问题tags: Basiccategories: [‘Java’]date: 2019&#x2F;01&#x2F;08 面向对象和面向过程的区别面向过程优点性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源; 缺点没有面向对象易维护、易复用、易扩展 面向对象优点易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HereUR">
+<meta property="og:url" content="http://example.com/2021/05/31/Java/Basic/Basic1/index.html">
+<meta property="og:site_name" content="HereUR">
+<meta property="og:description" content="title: 十进制-十六进制转换问题tags: Basiccategories: [‘Java’]date: 2019&#x2F;01&#x2F;08 面向对象和面向过程的区别面向过程优点性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源; 缺点没有面向对象易维护、易复用、易扩展 面向对象优点易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-31T07:03:36.064Z">
+<meta property="article:modified_time" content="2021-05-31T11:13:26.103Z">
+<meta property="article:author" content="Tough Chow">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/05/31/Java/Basic/Basic1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | HereUR</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HereUR</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/31/Java/Basic/Basic1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tough Chow">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HereUR">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-31 15:03:36 / 修改时间：19:13:26" itemprop="dateCreated datePublished" datetime="2021-05-31T15:03:36+08:00">2021-05-31</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>title: 十进制-十六进制转换问题<br>tags: Basic<br>categories: [‘Java’]<br>date: 2019/01/08</p>
+<h1 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h1><h2 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>没有面向对象易维护、易复用、易扩展</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><p>易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护</p>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><p>性能没有面向过程好</p>
+<h1 id="Java特性"><a href="#Java特性" class="headerlink" title="Java特性"></a>Java特性</h1><p>简单易学、面向对象、平台无关性、可靠性、安全性、支持多线程、支持网络编程、编译与解释并存</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承我们能够非常方便地复用以前的代码。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
+<p>在 Java 中有两种形式可以实现多态：继承（多个子类对同一方法的重写）和接口（实现接口并覆盖接口中同一方法）</p>
+<h1 id="JVM-VS-JDK-VS-JRE"><a href="#JVM-VS-JDK-VS-JRE" class="headerlink" title="JVM VS JDK VS JRE"></a>JVM VS JDK VS JRE</h1><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><p><code>Java Virtual Machine</code>是运行Java<code>字节码</code>的虚拟机</p>
+<h3 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h3><p>在Java中，JVM可以理解的代码就叫做<code>字节码</code>（扩展名为<code>.class</code>的文件），它不面向任何特定的处理器，只面向虚拟机。</p>
+<h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><p>JDK 是 Java Development Kit，它是功能齐全的 Java SDK。它拥有 JRE 所拥有的一切，还有编译器（javac）和工具（如 javadoc 和 jdb）。它能够创建和编译程序。</p>
+<h2 id="JRE"><a href="#JRE" class="headerlink" title="JRE"></a>JRE</h2><p>JRE 是 Java 运行时环境。它是运行已编译 Java 程序所需的所有内容的集合，</p>
+<p>包括 Java 虚拟机（JVM），Java 类库，java 命令和其他的一些基础构件。但是，它不能用于创建新程序。</p>
+<h1 id="Java-VS-C"><a href="#Java-VS-C" class="headerlink" title="Java VS C++"></a>Java VS C++</h1><ul>
+<li>都是面向对象的语言，都支持封装、继承和多态</li>
+<li>Java 不提供指针来直接访问内存，程序内存更加安全</li>
+<li>Java 的类是单继承的，C++ 支持多重继承；虽然 Java 的类不可以多继承，但是接口可以多继承。</li>
+<li>Java 有自动内存管理机制，不需要程序员手动释放无用内存</li>
+</ul>
+<h1 id="字符型常量-VS-字符串常量"><a href="#字符型常量-VS-字符串常量" class="headerlink" title="字符型常量 VS 字符串常量"></a>字符型常量 VS 字符串常量</h1><ol>
+<li>形式上: 字符常量是单引号引起的一个字符；字符串常量是双引号引起的若干个字符</li>
+<li>含义上: 字符常量相当于一个整形值( ASCII 值),可以参加表达式运算；字符串常量代表一个地址值(该字符串在内存中存放位置)</li>
+<li>占内存大小 字符常量只占 2 个字节；字符串常量占若干个字节(至少一个字符结束标志) (<strong>注意：</strong> <strong>char</strong> <strong>在</strong> <strong>Java</strong> <strong>中占两个字节</strong>)</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>大小</th>
+<th>取值区间</th>
+<th>包装器类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>-</td>
+<td>-</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>char</td>
+<td>16bits</td>
+<td>Unicode 0-Unicode 2^16-1</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>8bits</td>
+<td>-128~127</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16bits</td>
+<td>-2^15~2^15-1</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32bits</td>
+<td>-2^31~2^31-1</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>64bits</td>
+<td>-2^63~2^63-1</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>float</td>
+<td>32bits</td>
+<td>1.4E-45 （2的-149次方）~3.4028235E38 （2的128次方-1）</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>64bits</td>
+<td>4.9E-324 （2的-1074次方）~1.7976931348623157E308 （2的1024次方-1）</td>
+<td>Double</td>
+</tr>
+</tbody></table>
+<h1 id="重载-VS-重写"><a href="#重载-VS-重写" class="headerlink" title="重载 VS 重写"></a>重载 VS 重写</h1><h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>在同一个类中，方法名相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。</p>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>发生在父子类中，方法名、参数列表必须相同，返回值范围小于等于父类，抛出的异常小于等于父类，访问修饰符大于等于父类。</p>
+<h1 id="String-VS-StringBuffer-VS-StringBuilder"><a href="#String-VS-StringBuffer-VS-StringBuilder" class="headerlink" title="String VS StringBuffer VS StringBuilder"></a>String VS StringBuffer VS StringBuilder</h1><h2 id="可变性"><a href="#可变性" class="headerlink" title="可变性"></a>可变性</h2><p>String 类中使用 final 关键字字符数组保存字符串，private</p>
+<p>final char value[]，所以 String 对象是不可变的。而 StringBuilder 与</p>
+<p>StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串 char[]value 但是没有用 final 关键字修饰，所以这两种对象都是可变的。</p>
+<h2 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h2><p>String 中的对象是不可变的，也就可以理解为常量，线程安全。</p>
+<p>StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以</p>
+<p>是线程安全的。</p>
+<p>StringBuilder 并没有对方法进行加同步锁，所以是非线程安全</p>
+<p>的。</p>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。</p>
+<p>StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p>
+<h1 id="自动拆箱装箱"><a href="#自动拆箱装箱" class="headerlink" title="自动拆箱装箱"></a>自动拆箱装箱</h1><ul>
+<li>装箱：将基本类型用它们对应的引用类型包装起来；</li>
+<li>拆箱：将包装类型转换为基本数据类型。</li>
+</ul>
+<h1 id="抽象-VS-接口"><a href="#抽象-VS-接口" class="headerlink" title="抽象 VS 接口"></a>抽象 VS 接口</h1><ol>
+<li><p>接口的方法默认是 public，所有方法在接口中不能有实现(Java 8 开始接口方法可以有默认实现），抽象类可以有非抽象的方法</p>
+</li>
+<li><p>接口中的实例变量默认是 final 类型的，而抽象类中则不一定</p>
+</li>
+<li><p>一个类可以实现多个接口，但最多只能实现一个抽象类</p>
+</li>
+<li><p>一个类实现接口的话要实现接口的所有方法，而抽象类不一定</p>
+</li>
+<li><p>接口不能用 new 实例化，但可以声明，但是必须引用一个实现该接口的对象 从设计层面来说，抽象是对类的抽象，是一种模板设计，接口是行为的抽象，是一种行为的规范。</p>
+</li>
+</ol>
+<h1 id="成员变量-VS-局部变量"><a href="#成员变量-VS-局部变量" class="headerlink" title="成员变量 VS 局部变量"></a>成员变量 VS 局部变量</h1><ol>
+<li>语法形式：看成员变量是属于类的，而局部变量是在方法中定义的变量或是方法的参数；成员变量可以被public,private,static 等修饰符所修饰，而局部变量不能被访问控制修饰符及 static 所修饰；但是，成员变量和局部变量都能被 final 所修饰；</li>
+<li>变量在内存中的存储方式：，成员变量是对象的一部分，而对象存在于堆内存，局部变量存在于栈内存。</li>
+<li>变量在内存中的生存时间：，成员变量是对象的一部分，它随着对象的创建而存在，而局部变量随着方法的调用而自动消失。</li>
+<li>成员变量如果没有被赋初值，则会自动以类型的默认值而赋值（一种情况例外被 final 修饰的成员变量也必须显示地赋值）；而局部变量则不会自动赋值。</li>
+</ol>
+<h1 id="创建对象的方法"><a href="#创建对象的方法" class="headerlink" title="创建对象的方法"></a>创建对象的方法</h1><h2 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h2><p>调用了构造函数</p>
+<h2 id="使用Class类的newInstance方法"><a href="#使用Class类的newInstance方法" class="headerlink" title="使用Class类的newInstance方法"></a>使用Class类的newInstance方法</h2><p>调用了构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Employee emp2 = Employee.class.newInstance();</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用Constructor类的newInstance方法"><a href="#使用Constructor类的newInstance方法" class="headerlink" title="使用Constructor类的newInstance方法"></a>使用Constructor类的newInstance方法</h2><p>调用了构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor&lt;Employee&gt; constructor = Employee.class.getConstructor();</span><br><span class="line">Employee emp3 = constructor.newInstance();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h2><p>没有调用构造函数。要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Employee emp4 = (Employee) emp3.clone();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h2><p>没有调用构造函数。反序列化一个对象，我们需要让我们的类实现Serializable接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ObjectInputStream in = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">&quot;data.obj&quot;</span>));</span><br><span class="line">Employee emp5 = (Employee) in.readObject();</span><br></pre></td></tr></table></figure>
+
+<h1 id="静态方法-VS-实例方法"><a href="#静态方法-VS-实例方法" class="headerlink" title="静态方法 VS 实例方法"></a>静态方法 VS 实例方法</h1><ol>
+<li><p>在外部调用静态方法时，可以使用”类名.方法名”的方式，也可以使用”对象名.方法名”的方式。而实例方法只有后面这种方式。也就是说，调用静态方法可以无需创建对象。</p>
+</li>
+<li><p>静态方法在访问本类的成员时，只允许访问静态成员（即静态成员变量和静态方法），而不允许访问实例成员变量和实例方法；实例方法则无此限制.</p>
+</li>
+</ol>
+<h1 id="VS-equals"><a href="#VS-equals" class="headerlink" title="== VS equals"></a>== VS equals</h1><h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p>它的作用是判断两个对象的<strong>地址是不是相等</strong>。即，判断两个对象是不是同一个对象。(基本数据类型==比较的是值，引用数据类型==比较的是内存地址)</p>
+<h2 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h2><p>它的作用也是判断两个对象是否相等。但它一般有两种使用情况：</p>
+<ol>
+<li>类没有覆盖 equals() 方法。则通过 equals() 比较该类的两个</li>
+</ol>
+<p>对象时，等价于通过“==”比较这两个对象。</p>
+<ol start="2">
+<li><p>类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来</p>
+<p>两个对象的内容相等；若它们的内容相等，则返回 true (即，认为这两个对象相等)。</p>
+</li>
+</ol>
+<h1 id="hashCode-VS-equals"><a href="#hashCode-VS-equals" class="headerlink" title="hashCode VS equals"></a>hashCode VS equals</h1><h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h2><p>hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个 int 整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。</p>
+<p>散列表存储的是键值对(key-value)，它的特点是：能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！</p>
+<ol>
+<li><p>如果两个对象相等，则 hashcode 一定也是相同的</p>
+</li>
+<li><p>两个对象相等,对两个对象分别调用 equals 方法都返回 true</p>
+</li>
+<li><p>两个对象有相同的 hashcode 值，它们也不一定是相等的</p>
+</li>
+<li><p><strong>因此，****equals</strong> <strong>方法被覆盖过，则</strong> <strong>hashCode</strong> <strong>方法也必须被覆盖</strong></p>
+</li>
+<li><p>hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</p>
+</li>
+</ol>
+<h1 id="为什么Java只有值传递"><a href="#为什么Java只有值传递" class="headerlink" title="为什么Java只有值传递"></a>为什么Java只有值传递</h1><p>值传递（pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。</p>
+<p>引用传递（pass by reference）是指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。</p>
+<h1 id="线程-VS-程序-VS-进程"><a href="#线程-VS-程序-VS-进程" class="headerlink" title="线程 VS 程序 VS 进程"></a>线程 VS 程序 VS 进程</h1><ul>
+<li><p><strong>线程</strong>与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享同一块内存空间和一组系统资源，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
+</li>
+<li><p><strong>程序</strong>是含有指令和数据的文件，被存储在磁盘或其他的数据存储设备中，也就是说程序是静态的代码。</p>
+</li>
+<li><p><strong>进程</strong>是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。</p>
+</li>
+</ul>
+<h1 id="线程的基本状态"><a href="#线程的基本状态" class="headerlink" title="线程的基本状态"></a>线程的基本状态</h1><ol>
+<li>新建状态（New）：当线程对象对创建后，即进入了新建状态，如：Thread t = new MyThread();</li>
+<li>就绪状态（Runnable）：当调用线程对象的start()方法（t.start();），线程即进入就绪状态。处于就绪状态的线程，只是说明此线程已经做好了准备，随时等待CPU调度执行，并不是说执行了t.start()此线程立即就会执行；</li>
+<li>运行状态（Running）：当CPU开始调度处于就绪状态的线程时，此时线程才得以真正执行，即进入到运行状态。注：就   绪状态是进入到运行状态的唯一入口，也就是说，线程要想进入运行状态执行，首先必须处于就绪状态中；</li>
+<li>阻塞状态（Blocked）：处于运行状态中的线程由于某种原因，暂时放弃对CPU的使用权，停止执行，此时进入阻塞状态，直到其进入到就绪状态，才 有机会再次被CPU调用以进入到运行状态。根据阻塞产生的原因不同，阻塞状态又可以分为三种：</li>
+</ol>
+<ul>
+<li><p>1.等待阻塞：运行状态中的线程执行wait()方法，使本线程进入到等待阻塞状态；</p>
+</li>
+<li><p>2.同步阻塞 – 线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态；</p>
+</li>
+<li><p>3.其他阻塞 – 通过调用线程的sleep()或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。</p>
+</li>
+</ul>
+<ol start="5">
+<li>死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</li>
+</ol>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>在 Java 中，所有的异常都有一个共同的祖先 java.lang 包中的 <strong>Throwable</strong>类<strong>。Throwable： 有两个重要的子类：</strong>Exception<strong>（异常）</strong> 和 <strong>Error</strong>（错误） ，二者都是 Java 异常处理的重要子类，各自都包含大量子类。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/25/Java/Collection/HashMap/" rel="prev" title="HashMap">
+      <i class="fa fa-chevron-left"></i> HashMap
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">面向对象和面向过程的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">Java特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">2.2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">2.3.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-VS-JDK-VS-JRE"><span class="nav-number">3.</span> <span class="nav-text">JVM VS JDK VS JRE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">3.1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-number">3.1.1.</span> <span class="nav-text">字节码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK"><span class="nav-number">3.2.</span> <span class="nav-text">JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JRE"><span class="nav-number">3.3.</span> <span class="nav-text">JRE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-VS-C"><span class="nav-number">4.</span> <span class="nav-text">Java VS C++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E5%B8%B8%E9%87%8F-VS-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">字符型常量 VS 字符串常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-VS-%E9%87%8D%E5%86%99"><span class="nav-number">6.</span> <span class="nav-text">重载 VS 重写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD"><span class="nav-number">6.1.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%86%99"><span class="nav-number">6.2.</span> <span class="nav-text">重写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-VS-StringBuffer-VS-StringBuilder"><span class="nav-number">7.</span> <span class="nav-text">String VS StringBuffer VS StringBuilder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E6%80%A7"><span class="nav-number">7.1.</span> <span class="nav-text">可变性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">7.2.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">7.3.</span> <span class="nav-text">性能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%E8%A3%85%E7%AE%B1"><span class="nav-number">8.</span> <span class="nav-text">自动拆箱装箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1-VS-%E6%8E%A5%E5%8F%A3"><span class="nav-number">9.</span> <span class="nav-text">抽象 VS 接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F-VS-%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">10.</span> <span class="nav-text">成员变量 VS 局部变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">创建对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8new%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">11.1.</span> <span class="nav-text">使用new关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Class%E7%B1%BB%E7%9A%84newInstance%E6%96%B9%E6%B3%95"><span class="nav-number">11.2.</span> <span class="nav-text">使用Class类的newInstance方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Constructor%E7%B1%BB%E7%9A%84newInstance%E6%96%B9%E6%B3%95"><span class="nav-number">11.3.</span> <span class="nav-text">使用Constructor类的newInstance方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8clone%E6%96%B9%E6%B3%95"><span class="nav-number">11.4.</span> <span class="nav-text">使用clone方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">11.5.</span> <span class="nav-text">使用反序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95-VS-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="nav-number">12.</span> <span class="nav-text">静态方法 VS 实例方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VS-equals"><span class="nav-number">13.</span> <span class="nav-text">&#x3D;&#x3D; VS equals</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">13.1.</span> <span class="nav-text">&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals"><span class="nav-number">13.2.</span> <span class="nav-text">equals</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hashCode-VS-equals"><span class="nav-number">14.</span> <span class="nav-text">hashCode VS equals</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hashCode"><span class="nav-number">14.1.</span> <span class="nav-text">hashCode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88Java%E5%8F%AA%E6%9C%89%E5%80%BC%E4%BC%A0%E9%80%92"><span class="nav-number">15.</span> <span class="nav-text">为什么Java只有值传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B-VS-%E7%A8%8B%E5%BA%8F-VS-%E8%BF%9B%E7%A8%8B"><span class="nav-number">16.</span> <span class="nav-text">线程 VS 程序 VS 进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%8A%B6%E6%80%81"><span class="nav-number">17.</span> <span class="nav-text">线程的基本状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">18.</span> <span class="nav-text">异常处理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tough Chow"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tough Chow</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toughchow" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toughchow" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:toughchow@foxmail.com" title="E-Mail → mailto:toughchow@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tough Chow</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
